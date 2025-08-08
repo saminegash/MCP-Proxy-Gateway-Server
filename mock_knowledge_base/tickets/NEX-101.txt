@@ -1,0 +1,12 @@
+Ticket: NEX-101
+Summary: Implement RAG pipeline for developer assistant
+Description: Create a Retrieval-Augmented Generation pipeline that indexes local documentation, code, and JIRA tickets to provide contextual assistance to developers. The system should support semantic search, code-aware embeddings, and real-time document updates.
+Status: In Progress
+Priority: High
+Component: AI/RAG
+Assignee: ai_eng_b
+Reporter: product_owner
+Created: 2024-01-10T11:00:00Z
+Updated: 2024-01-24T13:30:00Z
+Refs: commit_ghi789, PR #48, commit_jkl012, rag_architecture.md, embedding_strategy.md, vector_store_design.md
+Progress: Basic RAG pipeline implemented with document indexing and vector similarity search. Working on enhanced embedding strategy for code documents and real-time indexing capabilities. Vector store optimization in progress.

@@ -1,0 +1,12 @@
+Ticket: NEX-789
+Summary: Research A2A security models
+Description: Investigate OAuth and other options for securing agent communication. Need to evaluate different authentication and authorization mechanisms for Agent-to-Agent (A2A) protocol to ensure secure inter-agent communication while maintaining performance and scalability.
+Status: To Do
+Priority: High
+Component: Security/Research
+Assignee: null
+Reporter: arch_d
+Created: 2024-01-18T16:00:00Z
+Updated: 2024-01-18T16:00:00Z
+Refs: a2a_spec.md
+Research Areas: OAuth 2.0 client credentials flow, JWT token structure and validation, mTLS for transport security, RBAC vs ABAC models, rate limiting strategies, audit logging requirements.

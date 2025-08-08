@@ -1,0 +1,12 @@
+Ticket: NEX-404
+Summary: Build MCP proxy server for unified access
+Description: Develop a central MCP proxy server that routes requests to appropriate downstream MCP servers (GitHub, filesystem, JIRA, etc.) to provide unified tool access for agents. The proxy should handle routing, load balancing, authentication, and provide a single endpoint for all MCP services.
+Status: In Progress
+Priority: Critical
+Component: Backend/Proxy
+Assignee: protocol_eng_c
+Reporter: arch_d
+Created: 2024-01-22T10:00:00Z
+Updated: 2024-01-26T16:45:00Z
+Refs: commit_vwx234, PR #58, proxy_design.md, routing_strategy.md, error_handling.md
+Progress: Basic routing implementation completed. Working on advanced features like health checking, circuit breakers, and method aggregation. Authentication passthrough and error handling modules in development.

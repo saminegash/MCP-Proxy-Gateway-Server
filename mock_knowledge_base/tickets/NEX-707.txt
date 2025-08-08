@@ -1,0 +1,12 @@
+Ticket: NEX-707
+Summary: Add real-time document indexing with Pathway
+Description: Integrate Pathway framework for real-time document indexing to keep the RAG knowledge base up-to-date with file system changes. This will ensure that the AI assistant always has access to the latest code and documentation without manual reindexing.
+Status: Research
+Priority: Low
+Component: AI/Streaming
+Assignee: ai_eng_a
+Reporter: ai_eng_b
+Created: 2024-01-24T09:30:00Z
+Updated: 2024-01-26T14:15:00Z
+Refs: commit_bcd890, pathway_integration.md, realtime_indexing_poc.md
+Research Progress: Evaluated Pathway framework capabilities for real-time data processing. Implemented prototype file watcher with change detection and incremental indexing. Testing performance impact and resource usage. Considering alternatives for production deployment.

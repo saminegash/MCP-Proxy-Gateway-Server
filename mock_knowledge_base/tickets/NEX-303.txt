@@ -1,0 +1,12 @@
+Ticket: NEX-303
+Summary: Create filesystem MCP server for local code access
+Description: Implement a filesystem MCP server that allows agents to securely browse and read local code repositories and documentation. Must include proper access controls, file type filtering, and security measures to prevent unauthorized access to sensitive files.
+Status: Testing
+Priority: Medium
+Component: Backend/MCP
+Assignee: backend_dev
+Reporter: protocol_eng_c
+Created: 2024-01-16T08:45:00Z
+Updated: 2024-01-26T09:30:00Z
+Refs: commit_pqr678, PR #55, commit_stu901, filesystem_mcp_spec.md, security_considerations.md
+Testing Status: Core functionality implemented and under security review. Testing file access controls, path traversal prevention, and rate limiting. Performance benchmarks showing good results with large codebases.

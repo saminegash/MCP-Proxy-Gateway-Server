@@ -1,0 +1,12 @@
+Ticket: NEX-606
+Summary: Optimize vector embeddings for code search
+Description: Improve the embedding model and indexing strategy for better code similarity search in the RAG pipeline. Current embeddings don't capture code semantics well enough, leading to poor search results for code-related queries.
+Status: Code Review
+Priority: Medium
+Component: AI/Embeddings
+Assignee: ai_eng_b
+Reporter: ai_eng_b
+Created: 2024-01-23T15:20:00Z
+Updated: 2024-01-26T11:00:00Z
+Refs: commit_yza567, PR #60, embedding_optimization.md, performance_metrics.md
+Implementation: Enhanced code tokenization with AST parsing, semantic feature extraction for functions/classes/imports, code-aware embedding model with weighted features, improved similarity metrics. Performance tests show 40% improvement in code search relevance.
