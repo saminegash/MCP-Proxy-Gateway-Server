@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev:proxy": "nodemon --watch src --exec ts-node src/proxy/server.ts",
     "dev:client": "ts-node src/client/mcpClientTester.ts",
     "dev:agent": "nodemon --watch src --exec ts-node src/agent/run.ts",
-    "dev:ui": "nodemon --watch src --exec ts-node src/ui/server.ts",
+    "dev:filesystem": "nodemon --watch src --exec ts-node src/servers/filesystem-mock.ts",
+    "dev:github": "nodemon --watch src --exec ts-node src/servers/github-mock.ts",
+    "dev:atlassian": "nodemon --watch src --exec ts-node src/servers/atlassian-mock.ts",
+    "dev:gdrive": "nodemon --watch src --exec ts-node src/servers/gdrive-mock.ts",
     "build": "tsc -p tsconfig.json",
     "test": "jest --runInBand",
     "lint": "eslint ."
@@ -34,7 +36,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@langchain/openai": "^0.3.0",
+    "@langchain/google-genai": "^0.2.16",
     "axios": "^1.11.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",

@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import { z } from 'zod';
-import { TARGETS, type TargetKey } from '../config/targets.js';
+import { TARGETS, type TargetKey } from '../config/targets';
 import 'dotenv/config';
 
 const app = express();
@@ -19,6 +19,7 @@ app.post('/mcp/:target', async (req, res) => {
   try {
     const { target } = req.params as { target: TargetKey };
     const downstream = TARGETS[target];
+    console.log("downstream",downstream)
     if (!downstream) return res.status(404).json({ error: `Unknown target ${target}` });
 
     const payload = JsonRpcSchema.parse(req.body);
@@ -36,6 +37,7 @@ app.get('/mcp/get_methods', async (_req, res) => {
   const entries = Object.entries(TARGETS) as [TargetKey, string][];
   const results = await Promise.allSettled(entries.map(async ([key, url]) => {
     const payload = { jsonrpc: '2.0', method: 'get_methods', id: `gm-${key}` };
+    console.log(payload, entries)
     const { data } = await axios.post(url, payload, { timeout: 10000 });
     return [key, data] as const;
   }));

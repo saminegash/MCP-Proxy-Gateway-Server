@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@langchain/openai':
-        specifier: ^0.3.0
-        version: 0.3.17(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))
+      '@langchain/google-genai':
+        specifier: ^0.2.16
+        version: 0.2.16(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))
       axios:
         specifier: ^1.11.0
         version: 1.11.0
@@ -25,7 +25,7 @@ importers:
         version: https://codeload.github.com/punkpeye/fastmcp/tar.gz/3711bb76008d0f418cbfaea86c0094d2c010cc20
       langchain:
         specifier: ^0.3.30
-        version: 0.3.30(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))(axios@1.11.0)(handlebars@4.7.8)(openai@5.12.1(zod@4.0.15))
+        version: 0.3.30(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))(@langchain/google-genai@0.2.16(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15))))(axios@1.11.0)(handlebars@4.7.8)(openai@5.12.1(zod@4.0.15))
       zod:
         specifier: ^4.0.15
         version: 4.0.15
@@ -298,6 +298,10 @@ packages:
     resolution: {integrity: sha512-Ul5l+lHEcw3L5+k8POx6r74mxEYKG5kOb6Xpy2gCRW6zweT6TEhAf8vhxGgjhqrd/VO/Dirhsb+1hNpD1ue9hw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@google/generative-ai@0.24.1':
+    resolution: {integrity: sha512-MqO+MLfM6kjxcKoy0p1wRzG3b4ZZXtPI+z2IE26UogS2Cm/XHO+7gGRBh6gcJsOiIVoH93UwKvW4HdgiOZCy9Q==}
+    engines: {node: '>=18.0.0'}
+
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -431,6 +435,12 @@ packages:
   '@langchain/core@0.3.68':
     resolution: {integrity: sha512-dWPT1h9ObG1TK9uivFTk/pgBULZ6/tBmq8czGUjZjR+1xh9jB4tm/D5FY6o5FklXcEpnAI9peNq2x17Kl9wbMg==}
     engines: {node: '>=18'}
+
+  '@langchain/google-genai@0.2.16':
+    resolution: {integrity: sha512-7xgQfZtn4EcKL7HYV7c5ZZUTjzjY0eh1Ex2570uwEBIUlyP5GFYeRe7gizx6965DYu6rktkXRMHaU0CuOXxAXQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@langchain/core': '>=0.3.58 <0.4.0'
 
   '@langchain/openai@0.3.17':
     resolution: {integrity: sha512-uw4po32OKptVjq+CYHrumgbfh4NuD7LqyE+ZgqY9I/LrLc6bHLMc+sisHmI17vgek0K/yqtarI0alPJbzrwyag==}
@@ -2565,6 +2575,10 @@ packages:
     resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
     hasBin: true
 
+  uuid@11.1.0:
+    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
+    hasBin: true
+
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
@@ -2956,6 +2970,8 @@ snapshots:
       '@eslint/core': 0.15.1
       levn: 0.4.1
 
+  '@google/generative-ai@0.24.1': {}
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.6':
@@ -3205,6 +3221,12 @@ snapshots:
       - '@opentelemetry/exporter-trace-otlp-proto'
       - '@opentelemetry/sdk-trace-base'
       - openai
+
+  '@langchain/google-genai@0.2.16(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))':
+    dependencies:
+      '@google/generative-ai': 0.24.1
+      '@langchain/core': 0.3.68(openai@5.12.1(zod@4.0.15))
+      uuid: 11.1.0
 
   '@langchain/openai@0.3.17(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))':
     dependencies:
@@ -4813,7 +4835,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.3.30(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))(axios@1.11.0)(handlebars@4.7.8)(openai@5.12.1(zod@4.0.15)):
+  langchain@0.3.30(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))(@langchain/google-genai@0.2.16(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15))))(axios@1.11.0)(handlebars@4.7.8)(openai@5.12.1(zod@4.0.15)):
     dependencies:
       '@langchain/core': 0.3.68(openai@5.12.1(zod@4.0.15))
       '@langchain/openai': 0.3.17(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))
@@ -4828,6 +4850,7 @@ snapshots:
       yaml: 2.8.1
       zod: 3.25.76
     optionalDependencies:
+      '@langchain/google-genai': 0.2.16(@langchain/core@0.3.68(openai@5.12.1(zod@4.0.15)))
       axios: 1.11.0
       handlebars: 4.7.8
     transitivePeerDependencies:
@@ -5518,6 +5541,8 @@ snapshots:
   uri-templates@0.2.0: {}
 
   uuid@10.0.0: {}
+
+  uuid@11.1.0: {}
 
   v8-compile-cache-lib@3.0.1: {}
 

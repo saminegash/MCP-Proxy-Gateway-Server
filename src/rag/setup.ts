@@ -1,8 +1,12 @@
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
-import { OpenAIEmbeddings } from '@langchain/openai';
+import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai';
 import fs from 'fs';
 import path from 'path';
+import { config } from 'dotenv';
+
+// Load environment variables from .env file
+config();
 
 export async function buildRetriever(kbDir = 'mock_knowledge_base') {
   const files: string[] = [];
@@ -23,8 +27,12 @@ export async function buildRetriever(kbDir = 'mock_knowledge_base') {
     const splits = await splitter.splitText(text);
     docs.push(...splits.map((t, i) => ({ pageContent: t, metadata: { file, i } })));
   }
+  console.log(process.env.GOOGLE_API_KEY);
 
-  const embeddings = new OpenAIEmbeddings(); // uses OPENAI_API_KEY
+  const embeddings = new GoogleGenerativeAIEmbeddings({
+    apiKey: process.env.GOOGLE_API_KEY,
+    model: "models/embedding-001", // uses GOOGLE_API_KEY
+  });
   const store = await MemoryVectorStore.fromDocuments(docs as any, embeddings);
   return store.asRetriever(5);
 }
