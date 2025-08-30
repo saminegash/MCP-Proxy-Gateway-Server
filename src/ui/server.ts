@@ -6,7 +6,7 @@ export function createApp() {
   const app = express();
   app.use(express.json());
 
-  const indexPath = path.join(process.cwd(), 'public', 'index.html');
+  const indexPath = path.join(__dirname, '..', '..', 'public', 'index.html');
 
   app.get('/', (_req, res) => {
     res.sendFile(indexPath);
