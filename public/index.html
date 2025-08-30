@@ -16,13 +16,21 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const q = document.getElementById('queryInput').value;
-      const res = await fetch('/api/query', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ query: q })
-      });
-      const json = await res.json();
-      document.getElementById('result').textContent = JSON.stringify(json, null, 2);
+      try {
+        const res = await fetch('/api/query', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ query: q })
+        });
+        if (!res.ok) {
+          document.getElementById('result').textContent = `Error: ${res.status} ${res.statusText}`;
+          return;
+        }
+        const json = await res.json();
+        document.getElementById('result').textContent = JSON.stringify(json, null, 2);
+      } catch (err) {
+        document.getElementById('result').textContent = `Error: ${err.message}`;
+      }
     });
   </script>
 </body>
