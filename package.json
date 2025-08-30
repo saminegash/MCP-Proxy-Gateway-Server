@@ -8,6 +8,7 @@
     "dev:proxy": "nodemon --watch src --exec ts-node src/proxy/server.ts",
     "dev:client": "ts-node src/client/mcpClientTester.ts",
     "dev:agent": "nodemon --watch src --exec ts-node src/agent/run.ts",
+    "dev:ui": "nodemon --watch src --exec ts-node src/ui/server.ts",
     "build": "tsc -p tsconfig.json",
     "test": "jest --runInBand",
     "lint": "eslint ."

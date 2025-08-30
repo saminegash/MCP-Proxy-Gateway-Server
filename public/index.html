@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Dev Assistant</title>
+</head>
+<body>
+  <h1>Dev Assistant</h1>
+  <form id="queryForm">
+    <input type="text" id="queryInput" placeholder="Enter query" size="40" />
+    <button type="submit">Send</button>
+  </form>
+  <pre id="result"></pre>
+  <script>
+    const form = document.getElementById('queryForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const q = document.getElementById('queryInput').value;
+      const res = await fetch('/api/query', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ query: q })
+      });
+      const json = await res.json();
+      document.getElementById('result').textContent = JSON.stringify(json, null, 2);
+    });
+  </script>
+</body>
+</html>
