@@ -7,6 +7,10 @@ This project provides a simple MCP proxy, a dev assistant agent with RAG, and a 
 - `pnpm dev:proxy` – start the proxy server
 - `pnpm dev:agent` – run the command line agent
 - `pnpm dev:ui` – start the express UI
+- `pnpm dev:filesystem` – mock filesystem server on `http://localhost:7001`
+- `pnpm dev:github` – mock GitHub server on `http://localhost:7002`
+- `pnpm dev:atlassian` – mock Atlassian server on `http://localhost:7003`
+- `pnpm dev:gdrive` – mock Google Drive server on `http://localhost:7004`
 
 The UI serves `public/index.html` on `http://localhost:3000/` and exposes an API at `/api/query`.
 
