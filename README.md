@@ -14,6 +14,13 @@ This project provides a simple MCP proxy, a dev assistant agent with RAG, and a 
 
 The UI serves `public/index.html` on `http://localhost:3000/` and exposes an API at `/api/query`.
 
+## Environment Variables
+
+- `GOOGLE_API_KEY` – used for building real embeddings. If unset, tests fall back to deterministic `FakeEmbeddings`.
+- `GITHUB_PERSONAL_ACCESS_TOKEN` – required for the GitHub MCP server.
+- `PORT` – port for the proxy server (defaults to `8002`).
+- `UI_PORT` – port for the web UI (defaults to `3000`).
+
 ## Testing
 
 Run all tests with:

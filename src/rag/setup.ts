@@ -1,6 +1,7 @@
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { GoogleGenerativeAIEmbeddings } from '@langchain/google-genai';
+import { FakeEmbeddings } from 'langchain/embeddings/fake';
 import fs from 'fs';
 import path from 'path';
 import { config } from 'dotenv';
@@ -27,12 +28,12 @@ export async function buildRetriever(kbDir = 'mock_knowledge_base') {
     const splits = await splitter.splitText(text);
     docs.push(...splits.map((t, i) => ({ pageContent: t, metadata: { file, i } })));
   }
-  console.log(process.env.GOOGLE_API_KEY);
-
-  const embeddings = new GoogleGenerativeAIEmbeddings({
-    apiKey: process.env.GOOGLE_API_KEY,
-    model: "models/embedding-001", // uses GOOGLE_API_KEY
-  });
+  const embeddings = process.env.GOOGLE_API_KEY
+    ? new GoogleGenerativeAIEmbeddings({
+        apiKey: process.env.GOOGLE_API_KEY,
+        model: "models/embedding-001", // uses GOOGLE_API_KEY
+      })
+    : new FakeEmbeddings();
   const store = await MemoryVectorStore.fromDocuments(docs as any, embeddings);
   return store.asRetriever(5);
 }
