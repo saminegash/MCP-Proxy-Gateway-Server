@@ -21,4 +21,12 @@ describe('UI query endpoint', () => {
     const res = await request(app).post('/api/query').send({});
     expect(res.status).toBe(400);
   });
+
+  test('handles agent errors with 500', async () => {
+    handleQuery.mockRejectedValueOnce(new Error('boom'));
+    const app = createApp();
+    const res = await request(app).post('/api/query').send({ query: 'test' });
+    expect(res.status).toBe(500);
+    expect(res.body).toEqual({ error: 'boom' });
+  });
 });
