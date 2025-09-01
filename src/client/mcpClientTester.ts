@@ -11,9 +11,19 @@
 import axios from 'axios';
 
 async function main() {
-  const [,, proxyUrl = 'http://localhost:8002/mcp/filesystem', method = 'get_methods'] = process.argv;
-  const payload = { jsonrpc: '2.0', method, id: '1', params: {} };
-  const { data } = await axios.post(proxyUrl, payload);
+  const [,, target = 'filesystem', method = 'get_methods', params = '{}', proxyBase = 'http://localhost:8002'] = process.argv;
+
+  let parsedParams: any = {};
+  try {
+    parsedParams = JSON.parse(params);
+  } catch (err) {
+    console.error('Failed to parse params JSON:', err);
+    process.exit(1);
+  }
+
+  const payload = { jsonrpc: '2.0', method, id: '1', params: parsedParams };
+  const url = `${proxyBase}/mcp/${target}`;
+  const { data } = await axios.post(url, payload);
   console.log(JSON.stringify(data, null, 2));
 }
 
