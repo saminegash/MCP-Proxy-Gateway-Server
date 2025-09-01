@@ -47,8 +47,10 @@ describe('end-to-end query flow', () => {
     const app = createApp();
     const res = await request(app).post('/api/query').send({ query: 'filesystem question' });
     expect(res.status).toBe(200);
-    expect(res.body.targetUsed).toBe('filesystem');
+    expect(res.body.parsed).toBeDefined();
+    expect(res.body.parsed.tool).toBe('filesystem');
     expect(res.body.mcpSnippet).toBeDefined();
+    expect(res.body.ragContextPreview).toBeDefined();
     expect(res.body.ragContextPreview[0].text).toContain('hello world');
   });
 });

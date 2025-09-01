@@ -26,8 +26,36 @@ export function parseQuery(query: string): { tool: ToolTarget; action: string; a
 export async function handleQuery(query: string, proxyBase = 'http://localhost:8002') {
   const { tool, action, args } = parseQuery(query);
 
-  const mcpPayload = { jsonrpc: '2.0', method: 'invoke_method', params: { method: action, ...args }, id: 'demo' };
-  const { data: mcpResult } = await axios.post(`${proxyBase}/mcp/${tool}`, mcpPayload);
+  let mcpPayload: any;
+  let mcpResult: any;
+
+  // Handle special case for listing available tools
+  if (action === 'get_methods' || action === 'list_tools') {
+    mcpPayload = { jsonrpc: '2.0', method: 'tools/list', id: 'demo' };
+  } else {
+    // For tool calls, use tools/call with proper format
+    mcpPayload = { 
+      jsonrpc: '2.0', 
+      method: 'tools/call', 
+      params: { 
+        name: action, 
+        arguments: args 
+      }, 
+      id: 'demo' 
+    };
+  }
+
+  try {
+    const { data } = await axios.post(`${proxyBase}/mcp/${tool}`, mcpPayload);
+    mcpResult = data;
+  } catch (error: any) {
+    mcpResult = {
+      error: {
+        code: -32000,
+        message: `Failed to call MCP server: ${error.message}`
+      }
+    };
+  }
 
   const retriever = await getRetriever();
   const ragDocs = await retriever.getRelevantDocuments(query);
