@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { TARGETS, type TargetKey } from '../config/targets';
 import 'dotenv/config';
 
-const app = express();
+export const app = express();
 app.use(express.json({ limit: '2mb' }));
 
 const JsonRpcSchema = z.object({
@@ -37,7 +37,7 @@ app.get('/mcp/get_methods', async (_req, res) => {
   const entries = Object.entries(TARGETS) as [TargetKey, string][];
   const results = await Promise.allSettled(entries.map(async ([key, url]) => {
     const payload = { jsonrpc: '2.0', method: 'get_methods', id: `gm-${key}` };
-    console.log(payload, entries)
+    console.log(payload, entries);
     const { data } = await axios.post(url, payload, { timeout: 10000 });
     return [key, data] as const;
   }));
@@ -45,5 +45,7 @@ app.get('/mcp/get_methods', async (_req, res) => {
   res.json({ aggregated });
 });
 
-const port = Number(process.env.PORT || 8002);
-app.listen(port, () => console.log(`MCP Proxy listening on http://localhost:${port}`));
+if (require.main === module) {
+  const port = Number(process.env.PORT || 8002);
+  app.listen(port, () => console.log(`MCP Proxy listening on http://localhost:${port}`));
+}
